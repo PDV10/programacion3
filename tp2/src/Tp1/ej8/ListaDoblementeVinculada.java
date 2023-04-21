@@ -1,22 +1,37 @@
-package Tp1.ej5;
+package Tp1.ej8;
 
-import java.util.Iterator;
-
-import Tp1.Node;
-
-public class MySimpleLinkedListIterable<T> implements Iterable<T> {
-	public Node<T> first;
+public class ListaDoblementeVinculada<T>{
+	public Node<T> first,last;
 	public int size;
 
-	public MySimpleLinkedListIterable() {
+	public ListaDoblementeVinculada() {
 		this.first = null;
+		this.last =null;
 		this.size = 0;
 	}
 
-	public void insertFront(T info) {
-		Node<T> tmp = new Node<T>(info, null);
-		tmp.setNext(this.first);
-		this.first = tmp;
+  public void insertLast( T info) {
+      Node <T> nuevo = new Node <T>(info,null, null);
+      if(this.first == null) {
+    	  this.insertFront(info);
+      }else {	
+    	  last.setNext(nuevo);
+    	  nuevo.setPrev(last);
+    	  last = nuevo;
+      }     
+      size++;
+  }
+	
+	public void insertFront(T info) { 	
+		Node<T> nuevo = new Node<T>(info, null, null);	
+		if(this.first == null){
+			first = nuevo;
+			last = first;
+		}else {
+			first.setPrev(nuevo);
+			first.prev.setNext(first);
+			first = nuevo;
+		}	
 		size++;
 	}
 
@@ -30,7 +45,18 @@ public class MySimpleLinkedListIterable<T> implements Iterable<T> {
 			return null;
 		}
 	}
-
+	
+	public <T> T extractLast() {
+		if(this.last != null) {
+			this.last = this.last.getPrev();
+			this.last.setNext(null);
+			size--;
+			return (T) this.last.getInfo();
+		}else {
+			return null;			
+		}	
+	}
+	
 	public boolean isEmpty() {
 		return this.first == null;
 	}
@@ -74,12 +100,7 @@ public class MySimpleLinkedListIterable<T> implements Iterable<T> {
 			r += " - " + aux.getInfo() + " - \n";
 			aux = aux.getNext();
 		}
+		
 		return  r;
-	}
-
-	@Override
-	public Iterator<T> iterator() {
-	
-		return null;
 	}
 }
