@@ -32,8 +32,8 @@ public class Nodo {
 		}
 	}
 	
-	public boolean isEmpty(Nodo nodo) {	
-		return nodo == null;
+	public boolean isEmpty() {	
+		return this == null;
 	}
 	
 	public int getValor() {
