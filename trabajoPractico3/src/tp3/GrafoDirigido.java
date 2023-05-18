@@ -2,7 +2,6 @@ package tp3;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -94,34 +93,24 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		if(contieneVertice(verticeInicio) && contieneVertice(verticeDestino)) { // O(1) * O(1) = O(1)
 			// obtengo la arraylist de arcos a partir del verticeInicio del grafo
 			ArrayList<Arco<T>> arcos = grafo.get(verticeInicio);
-			
-				// con iterator
-				Iterator<Arco<T>> aux = arcos.iterator();
-				while(aux.hasNext()) {	// O(a)
-					Arco<T> arco = (Arco<T>) aux.next();
-					if(arco.getVerticeDestino() == verticeDestino) {
-						return true;
-					}
-				}
 				
-				// bien pero mal O(n2)
-//				for (int i = 0; i < arcos.size(); i++) {
-//					// si el vertice de origen y destino del arco son iguales al de los paremetros retorno true
-//					if(arcos.get(i).getVerticeOrigen() == verticeInicio && arcos.get(i).getVerticeDestino() == verticeDestino) {
-//						return true;
-//					}
-//				}
-			
+			Iterator<Arco<T>> aux = arcos.iterator();
+			while(aux.hasNext()) {	// O(a)
+				Arco<T> arco = (Arco<T>) aux.next();
+				if(arco.getVerticeDestino() == verticeDestino) {
+					return true;
+				}
+			}						
 		}
 		return false;
 	}
 	
-	/** preguntar si en la condicion esta bien preguntar si existe el arco
-	 * Complejidad: O(a^2) debido a que el metodo 
+	/** 
+	 * Complejidad: O(a) donde a es la cantidad de arcos que se deben iterar
 	 */ 
 	@Override
 	public Arco<T> obtenerArco(int verticeInicio, int verticeDestino) {
-		if( existeArco(verticeInicio, verticeDestino)) {
+		if(contieneVertice(verticeInicio)) {
 			ArrayList<Arco<T>> arcos = grafo.get(verticeInicio);
 			Iterator<Arco<T>> aux = arcos.iterator();
 			while(aux.hasNext()) {
@@ -135,7 +124,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 	
 	/**
-	 * 
+	 * Complejidad: O(1) ya que el metodo .size() ya conoce el tamaño del grafo y no debe recorrerlo
 	 */
 	@Override
 	public int cantidadVertices() {
@@ -143,7 +132,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 	
 	/**
-	 * 
+	 * Complejidad: O(v) donde v es la cantidad de valores de cada vertice del grafo obtenidos con el metodo .keyset()
 	 */
 	@Override
 	public int cantidadArcos() {
@@ -151,7 +140,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		int cantArcos = 0;
 		// obtengo una lista con todos los vertices del grafo y lo hago iterable
 		Iterator<Integer> vertices = this.grafo.keySet().iterator();
-		while(vertices.hasNext()) {
+		while(vertices.hasNext()) { // O(v)
 			// a cantAcos le sumo la cantidad de arcos de cada vertice mientras que exista
 			cantArcos += this.grafo.get(vertices.next()).size();
 		}
@@ -159,7 +148,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 	
 	/**
-	 * 
+	 * Complejidad: O(1) ya que el addAll agrega la lista obtenida sin iterarla 
 	 */
 	@Override
 	public Iterator<Integer> obtenerVertices() {
@@ -172,7 +161,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 	
 	/**
-	 * 
+	 * Complejidad: O(a) donde a es la cantidad de arcos de cada vertice a iterar dentro del while
 	 */
 	@Override
 	public Iterator<Integer> obtenerAdyacentes(int verticeId) {
@@ -192,7 +181,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 	
 	/**
-	 * 
+	 * Complejidad: O(v) donde v es la cantidad de valores de cada vertice del grafo obtenidos con el metodo .keyset()
 	 */
 	@Override
 	public Iterator<Arco<T>> obtenerArcos() {
@@ -208,7 +197,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 	
 	/**
-	 * 
+	 * Complejidad: O(1) ya que el addAll agrega la lista obtenida sin iterarla 
 	 */
 	@Override
 	public Iterator<Arco<T>> obtenerArcos(int verticeId) {
@@ -219,5 +208,4 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		
 		return arcos.iterator();
 	}
-	
 }
