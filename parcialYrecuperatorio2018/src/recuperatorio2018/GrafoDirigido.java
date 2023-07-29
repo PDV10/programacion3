@@ -1,4 +1,4 @@
-package tp3;
+package recuperatorio2018;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	
 	
 	/**
-	 *Complejidad: O(a) donde "a" es la cantidad de arcos del grafo que se recorren
+	 *Complejidad: O(a) donde  donde "a" es la cantidad de arcos del vertice los cuales se deben recorrer
 	 */
 	@Override
 	public void borrarVertice(int verticeId) {
@@ -32,9 +32,8 @@ public class GrafoDirigido<T> implements Grafo<T> {
 			this.grafo.remove(verticeId); // es O(1)
 			Iterator<Arco<T>> arcos = obtenerArcos();
 			while(arcos.hasNext()) { //es O(a)
-				Arco<T> arco = arcos.next();
-				if(arco.getVerticeOrigen() == verticeId || arco.getVerticeDestino() == verticeId) {
-					borrarArco(arco.getVerticeOrigen(), arco.getVerticeDestino());
+				if(arcos.next().getVerticeDestino() == verticeId ) {
+					borrarArco(arcos.next().getVerticeOrigen(), arcos.next().getVerticeDestino());
 				}
 			}
 		}

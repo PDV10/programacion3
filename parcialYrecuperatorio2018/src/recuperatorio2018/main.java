@@ -1,29 +1,13 @@
-package tp3;
+package recuperatorio2018;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
 public class main {
 	public static <T> void main(String[] args) {
-		GrafoDirigido<T> grafo = new GrafoDirigido<>();
+		GrafoDirigido<Integer> grafo = new GrafoDirigido<>();
 
-//		grafo.agregarVertice(0);
-//		grafo.agregarVertice(5);
-//		grafo.agregarVertice(1);
-//		grafo.agregarVertice(4);
-//		grafo.agregarVertice(2);
-//		grafo.agregarVertice(3);
-//
-//		grafo.agregarArco(0,5,null);
-//		grafo.agregarArco(0,1,null);
-//		grafo.agregarArco(5,4,null);
-//		grafo.agregarArco(4,3,null);
-//		grafo.agregarArco(5,3,null);
-//		grafo.agregarArco(1,2,null);
-//		grafo.agregarArco(1,4,null);
-//		grafo.agregarArco(2,3,null);
-//		grafo.agregarArco(3,1,null);
-//		grafo.agregarArco(3,0,null);
 		grafo.agregarVertice(5);
 		grafo.agregarVertice(3);
 		grafo.agregarVertice(8);
@@ -52,9 +36,9 @@ public class main {
 //		ServicioDFS<T> service = new ServicioDFS<>(grafo);
 //		System.out.println(service.dfsForest());
 
-		ServicioBFS<T> serviceBFS = new ServicioBFS<>(grafo);
-		System.out.println(serviceBFS.bfsForest());
-		
+		servicioBFS serviceBFS = new servicioBFS(grafo);
+		serviceBFS.bfsForest(3);
+		System.out.println(serviceBFS.getSuma());
 //		ServicioCaminos<T> caminos = new ServicioCaminos<>(grafo,3,1,5);
 //		System.out.println(caminos.caminos());
 
